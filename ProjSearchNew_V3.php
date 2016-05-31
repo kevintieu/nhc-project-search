@@ -145,11 +145,11 @@
 				</div>
 				<div class="col-xs-1">
 					<!--
-					<a href="#" class="scroll text-center" data-toggle="tooltip" title="Back to top">
-						<img src="back-to-top.png">
-					</a>
-					-->
 					<a href="#" class="scroll text-center" data-toggle="tooltip" title="Back to top"><i class="material-icons md-56">vertical_align_top</i></a>
+					-->
+					<a href="#" class="scroll text-center" data-toggle="tooltip" title="Back to top">
+						<img src="images/back-to-top.png" width="50" height="50">
+					</a>
 				</div>
 			</div>
 		</div>

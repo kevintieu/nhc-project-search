@@ -1,15 +1,11 @@
 <?php
 	include 'LogIn_Security.php';
 	include 'LoadDb.php';
-	include 'export.php';
+	//include 'indexnew.php';
 
 	function logout() {
 		session_destroy();
 		header("Location: indexnew.php");
-	}
-
-	if(isset($_POST['logout'])) {
-		logout();
 	}
 
 	function export($input) {
@@ -44,6 +40,10 @@
 		echo $output;
 		exit;
 	}
+
+	if(isset($_POST['logout'])) {
+		logout();
+	}
 	
 	if(isset($_POST['export'])) {
 		$input = $_POST['hidden_input'];
@@ -54,7 +54,26 @@
 			export($input);
 		}
 	}
-	
+
+
+	$query2 = pg_query("SELECT permissions FROM person WHERE person = '" . $_SESSION['username'] . "'");
+	while($row = pg_fetch_array($query2)) {
+		$permissions = $row['permissions'];
+	}
+	if($permissions == 't') {
+
+	} else {
+
+	}
+
+
+	$query3 = pg_query("SELECT name_first, name_last FROM person WHERE person = '" . $_SESSION['username'] . "'");
+    while($row2 = pg_fetch_array($query3)) {
+    	$name_first = $row2['name_first'];
+    	$name_last = $row2['name_last'];
+    	$name_full = $name_first . " " . $name_last;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +119,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-2">
-					
+					<button type="button" class="btn btn-success btn-xs center-block" id="newentry">New Entry</button>
 				</div>
 				<div class="col-xs-8">
 					<div class="radio">
@@ -110,6 +129,7 @@
 					</div>
 				</div>
 				<div class="col-xs-2">
+					<p>Signed in as: <strong><?php echo $name_full; ?></strong></p> 
 				</div>
 			</div>
 		</div>

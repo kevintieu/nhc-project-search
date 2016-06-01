@@ -25,6 +25,9 @@
 		
     }
 
+    $username = $_POST['Person'];
+    $_SESSION['username'] = strtoupper($username);
+
 ?>
 
 <!DOCTYPE html>

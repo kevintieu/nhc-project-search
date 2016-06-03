@@ -60,11 +60,6 @@
 	while($row = pg_fetch_array($query2)) {
 		$permissions = $row['permissions'];
 	}
-	if($permissions == 't') {
-
-	} else {
-
-	}
 
 
 	$query3 = pg_query("SELECT name_first, name_last FROM person WHERE person = '" . $_SESSION['username'] . "'");
@@ -119,7 +114,13 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-2">
-					<button type="button" class="btn btn-success btn-xs center-block" id="newentry">New Entry</button>
+					<?php 
+					if($permissions == 't') {
+						echo "<button type='button' class='btn btn-success btn-xs center-block'>New Entry</button>";
+					} else {
+						echo "<button type='button' class='btn btn-success btn-xs center-block disabled' data-toggle='tooltip' data-placement='bottom' title='You do not have permission'>New Entry</button>";
+					}
+					?>
 				</div>
 				<div class="col-xs-8">
 					<div class="radio">
@@ -129,7 +130,7 @@
 					</div>
 				</div>
 				<div class="col-xs-2">
-					<p>Signed in as: <strong><?php echo $name_full; ?></strong></p> 
+					<p>Logged in as: <strong><?php echo $name_full; ?></strong></p> 
 				</div>
 			</div>
 		</div>
@@ -144,6 +145,7 @@
 							<th>Project Manager</th>
 							<th>Client Name</th>
 							<th>Project Location</th>
+							<th>Action</th>
 						</tr>
 						<?php
 						if(isset($_POST['search'])) {
@@ -156,7 +158,8 @@
 										<td>" . $rows['proj_nm'] . "</td>
 										<td>" . $rows['proj_mgr'] . "</td>
 										<td>" . $rows['client_nm'] . "</td>
-										<td>" . $rows['proj_loc'] . "</td> 
+										<td>" . $rows['proj_loc'] . "</td>
+										<td class='xx'><button class='btn btn-info edit-btn'>Edit</button></td>
 									</tr>";
 							}
 						}

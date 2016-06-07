@@ -55,12 +55,10 @@
 		}
 	}
 
-
 	$query2 = pg_query("SELECT permissions FROM person WHERE person = '" . $_SESSION['username'] . "'");
 	while($row = pg_fetch_array($query2)) {
 		$permissions = $row['permissions'];
 	}
-
 
 	$query3 = pg_query("SELECT name_first, name_last FROM person WHERE person = '" . $_SESSION['username'] . "'");
     while($row2 = pg_fetch_array($query3)) {
@@ -149,17 +147,20 @@
 						</tr>
 						<?php
 						if(isset($_POST['search'])) {
-							// $result = pg_query("SELECT * FROM (SELECT proj_cd, proj_nm, proj_mgr, proj_loc, client_nm, ts_rank_cd(to_tsvector('english', body), to_tsquery('".$SearchStr."')) AS score FROM proj) s WHERE score > 0 ORDER BY score DESC, proj_cd DESC;") or die(pg_last_error());
 							$result = pg_query("SELECT * FROM proj WHERE LOWER(proj_nm) LIKE LOWER('%" . $_POST['input'] . "%') OR proj_cd LIKE '%" . $_POST['input'] . "%' OR LOWER(client_nm) LIKE LOWER('%" . $_POST['input'] . "%') ORDER BY proj_cd ASC");
 							while($rows = pg_fetch_array($result)) {
 								echo "
 									<tr>
-										<td>" . $rows['proj_cd'] . "</td>
-										<td>" . $rows['proj_nm'] . "</td>
-										<td>" . $rows['proj_mgr'] . "</td>
-										<td>" . $rows['client_nm'] . "</td>
-										<td>" . $rows['proj_loc'] . "</td>
-										<td class='xx'><button class='btn btn-info edit-btn'>Edit</button></td>
+										<td class='proj_cd' id=" . $rows['proj_cd'] . ">" . $rows['proj_cd'] . "</td>
+										<td class='proj_nm' id='proj_nm'>" . $rows['proj_nm'] . "</td>
+										<td class='proj_mgr' id='proj_mgr'>" . $rows['proj_mgr'] . "</td>
+										<td class='client_nm' id='client_nm'>" . $rows['client_nm'] . "</td>
+										<td class='proj_loc' id='proj_loc'>" . $rows['proj_loc'] . "</td>
+										<td class='xx'>
+											<form method='POST' action=''>
+												<input type='submit' class='btn btn-info edit-btn' value='Edit' id='edit-submit'>
+											</form>
+										</td>
 									</tr>";
 							}
 						}

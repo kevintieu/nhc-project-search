@@ -85,9 +85,30 @@ h1 {
 }
 
 .edit-btn {
-  width: 60px;
+  width: 50px;
 }
 
 .editable {
   background-color: #FDE3A7;
+}
+
+#save-alert {
+  text-align: center;
+  position: fixed;
+  width: 200px;
+  top: 25px;
+  right: 40px;
+  z-index: 2;
+  opacity: 0.95;
+  background-color: #C8F7C5;
+}
+
+#delete-alert {
+  text-align: center;
+  position: fixed;
+  width: 200px;
+  top: 25px;
+  right: 40px;
+  z-index: 2;
+  opacity: 0.95;
 }

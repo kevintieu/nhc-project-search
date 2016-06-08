@@ -121,11 +121,13 @@
 					?>
 				</div>
 				<div class="col-xs-8">
+					<!--
 					<div class="radio">
 						<label class="radio-inline">Operator: </label>
 						<label class="radio-inline"><input type="radio" value="And" name="optradio" checked="">AND</label>
 						<label class="radio-inline"><input type="radio" value="Or" name="optradio">OR</label>
 					</div>
+					-->
 				</div>
 				<div class="col-xs-2">
 					<p>Logged in as: <strong><?php echo $name_full; ?></strong></p> 
@@ -158,7 +160,21 @@
 										<td class='proj_loc' id='proj_loc'>" . $rows['proj_loc'] . "</td>
 										<td class='xx'>
 											<form method='POST' action=''>
-												<input type='submit' class='btn btn-info edit-btn' value='Edit' id='edit-submit'>
+												<div class='btn-group btn-group-xs'>
+													";
+													if($permissions == 't') {
+														echo "
+															<button type='button' class='btn btn-info edit-btn'>Edit</button>
+															<button type='button' class='btn btn-info save-btn'>Save</button>
+															<button type='button' class='btn btn-info delete-btn'>Delete</button>";
+													} else {
+														echo "
+															<button type='button' class='btn btn-info edit-btn disabled'>Edit</button>
+															<button type='button' class='btn btn-info save-btn disabled'>Save</button>
+															<button type='button' class='btn btn-info delete-btn disabled'>Delete</button>";
+													}
+													echo "
+												</div>
 											</form>
 										</td>
 									</tr>";
@@ -176,6 +192,12 @@
 					</a>
 				</div>
 			</div>
+		</div>
+		<div class='alert alert-success' id='save-alert'>
+			<strong>Saved</strong>
+		</div>
+		<div class='alert alert-danger' id='delete-alert'>
+			<strong>Deleted</strong>
 		</div>
 	</body>
 

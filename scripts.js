@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  $('.alert').hide();
+
 	//Check to see if the window is top if not then display button
 	$(window).scroll(function() {
 		if ($(this).scrollTop() > 100) {
@@ -17,55 +19,85 @@ $(document).ready(function() {
 	
 	$('[data-toggle="tooltip"]').tooltip();
 
-  $('.edit-btn').on('click', function() {
+  $('.edit-btn').on('click', function () {
     $currentTD = $(this).parents('tr').find('td');
-    if($(this).val() == 'Edit') {
-      $(this).val('Save');
+    if($(this).html() == 'Edit') {
+      $(this).html('Cancel');
       $.each($currentTD, function() {
         if($(this).prop('class') == 'xx') {
           return false;
         }
-        $(this).on('blur', function() {
-          $.each($currentTD, function() {
-            $(this).prop('contenteditable', false);
-            $(this).removeClass('editable');
-            $('.edit-btn').val('Edit');
-          });
-        });
         $(this).prop('contenteditable', true);
         $(this).addClass('editable');
       });
       return false;
-    } else if($(this).val() == 'Save') {
-      $(this).val('Edit');
+    } else if($(this).html() == 'Cancel') {
+      $(this).html('Edit');
       $.each($currentTD, function() {
-        if($(this).prop('class') == 'xx') {
-          return false;
-        }
         $(this).prop('contenteditable', false);
         $(this).removeClass('editable');
-        if($(this).prop('class') == 'proj_cd') {
-          $proj_cd = $(this).prop('id');
-        }
-        $field_name = $(this).prop('class');
-        $value = $(this).html();
-        $.ajax({
-          url: 'edit.php',
-          type: 'POST',
-          data: {
-            field_name: $field_name,
-            value: $value,
-            proj_cd: $proj_cd
-          },
-          success: function(result) {
-            console.log(result);
-          }
-        });
       });
       return false;
     }
   });
 
+  $('.save-btn').on('click', function() {
+    $currentTD = $(this).parents('tr').find('td');
+    $.each($currentTD, function() {
+      if($(this).prop('class') == 'xx') {
+        return false;
+      }
+      $(this).prop('contenteditable', false);
+      $(this).removeClass('editable');
+      $('#save-alert').alert();
+      $('#save-alert').show().delay(1500).fadeOut(1500, function() {
+        $('#save-alert').hide();
+      });
+      $('.edit-btn').html('Edit');
+      if($(this).prop('class') == 'proj_cd') {
+        $proj_cd = $(this).prop('id');
+      }
+      $field_name = $(this).prop('class');
+      $value = $(this).html();
+      $.ajax({
+        url: 'edit.php',
+        type: 'POST',
+        data: {
+          field_name: $field_name,
+          value: $value,
+          proj_cd: $proj_cd
+        },
+        success: function(result) {
+          console.log(result);
+        }
+      });
+    });
+    return false;
+  });
 
+  $('.delete-btn').on('click', function() {
+    $currentTD = $(this).parents('tr').find('td');
+    $.each($currentTD, function() {
+      if($(this).prop('class') == 'proj_cd') {
+        $proj_cd = $(this).prop('id');
+      }
+      /*
+      $.ajax({
+        url: 'delete.php',
+        type: 'POST',
+        data: {
+          proj_cd: $proj_cd
+        },
+        success: function(result) {
+          console.log(result);
+        }
+      });
+      */
+      $('#delete-alert').alert();
+      $('#delete-alert').show().delay(1500).fadeOut(1500, function() {
+        $('#delete-alert').hide();
+      });
+    });
+  });
+  
 });
-

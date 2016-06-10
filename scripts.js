@@ -2,15 +2,15 @@ $(document).ready(function() {
 
   $('.alert').hide();
 
-	//Check to see if the window is top if not then display button
-	$(window).scroll(function() {
-		if ($(this).scrollTop() > 100) {
-			$('.scroll').fadeIn();
-		} else {
-			$('.scroll').fadeOut();
-		}
-	});
-	
+  //Check to see if the window is top if not then display button
+  $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+      $('.scroll').fadeIn();
+    } else {
+      $('.scroll').fadeOut();
+    }
+  });
+
 	//Click event to scroll to top
 	$('.scroll').click(function() {
 		$('html, body').animate({scrollTop : 0},800);
@@ -21,8 +21,11 @@ $(document).ready(function() {
 
   $('.edit-btn').on('click', function () {
     $currentTD = $(this).parents('tr').find('td');
-    if($(this).html() == 'Edit') {
-      $(this).html('Cancel');
+    if($(this).val() == 'Edit') {
+      $(this).val('Cancel');
+      $(this).html("<i class='fa fa-times' aria-hidden='true'></i>");
+      $(this).removeClass('btn-success');
+      $(this).addClass('btn-danger');
       $.each($currentTD, function() {
         if($(this).prop('class') == 'xx') {
           return false;
@@ -31,8 +34,11 @@ $(document).ready(function() {
         $(this).addClass('editable');
       });
       return false;
-    } else if($(this).html() == 'Cancel') {
-      $(this).html('Edit');
+    } else if($(this).val() == 'Cancel') {
+      $(this).val('Edit');
+      $(this).html("<i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span>");
+      $(this).removeClass('btn-danger');
+      $(this).addClass('btn-success');
       $.each($currentTD, function() {
         $(this).prop('contenteditable', false);
         $(this).removeClass('editable');
@@ -53,7 +59,10 @@ $(document).ready(function() {
       $('#save-alert').show().delay(1500).fadeOut(1500, function() {
         $('#save-alert').hide();
       });
-      $('.edit-btn').html('Edit');
+      $('.edit-btn').val('Edit');
+      $('.edit-btn').html("<span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span>");
+      $('.edit-btn').removeClass('btn-danger');
+      $('.edit-btn').addClass('btn-success');
       if($(this).prop('class') == 'proj_cd') {
         $proj_cd = $(this).prop('id');
       }
@@ -75,15 +84,15 @@ $(document).ready(function() {
     return false;
   });
 
+
   $('.delete-btn').on('click', function() {
     $currentTD = $(this).parents('tr').find('td');
     $.each($currentTD, function() {
       if($(this).prop('class') == 'proj_cd') {
         $proj_cd = $(this).prop('id');
       }
-      /*
       $.ajax({
-        url: 'delete.php',
+        url: '',
         type: 'POST',
         data: {
           proj_cd: $proj_cd
@@ -92,12 +101,38 @@ $(document).ready(function() {
           console.log(result);
         }
       });
-      */
       $('#delete-alert').alert();
       $('#delete-alert').show().delay(1500).fadeOut(1500, function() {
         $('#delete-alert').hide();
       });
+      $(this).fadeTo(800, 0, function() {
+        $(this).remove();
+      });
     });
   });
-  
+
+
+  $('#insert').on('click', function() {
+    $proj_cd_form = $('#proj_cd_form').val();
+    $proj_nm_form = $('#proj_nm_form').val();
+    $proj_mgr_form = $('#proj_mgr_form').val();
+    $client_nm_form = $('#client_nm_form').val();
+    $proj_loc_form = $('#proj_loc_form').val();
+    $.ajax({
+      url: 'newentry.php',
+      type: 'POST',
+      data: {
+        proj_cd_form: $proj_cd_form,
+        proj_nm_form: $proj_nm_form,
+        proj_mgr_form: $proj_mgr_form,
+        client_nm_form: $client_nm_form,
+        proj_loc_form: $proj_loc_form
+      },
+      success: function(result) {
+        console.log(result);
+      }
+    });
+    $('#new_entry_form')[0].reset();
+  });
+
 });

@@ -84,12 +84,13 @@ h1 {
   display: none;
 }
 
-.edit-btn {
-  width: 50px;
-}
-
 .editable {
   background-color: #FDE3A7;
+}
+
+.btn-group .btn {
+  width: 33px;
+  height: 25px;
 }
 
 #save-alert {
@@ -111,4 +112,8 @@ h1 {
   right: 40px;
   z-index: 2;
   opacity: 0.95;
+}
+
+.table td:last-child {
+  width: 120px;
 }

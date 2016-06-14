@@ -11,18 +11,19 @@ $(document).ready(function() {
     }
   });
 
-	//Click event to scroll to top
-	$('.scroll').click(function() {
-		$('html, body').animate({scrollTop : 0},800);
-		return false;
-	});
-	
-	$('[data-toggle="tooltip"]').tooltip();
+  //Click event to scroll to top
+  $('.scroll').click(function() {
+    $('html, body').animate({scrollTop : 0},800);
+    return false;
+  });
+  
+  $('[data-toggle="tooltip"]').tooltip();
 
   $('.edit-btn').on('click', function () {
     $currentTD = $(this).parents('tr').find('td');
     if($(this).val() == 'Edit') {
       $(this).val('Cancel');
+      $(this).prop('title', 'Cancel');
       $(this).html("<i class='fa fa-times' aria-hidden='true'></i>");
       $(this).removeClass('btn-success');
       $(this).addClass('btn-danger');
@@ -31,11 +32,12 @@ $(document).ready(function() {
           return false;
         }
         $(this).prop('contenteditable', true);
-        $(this).addClass('editable');
-      });
+        $(this).addClass('editable'); 
+      }); 
       return false;
     } else if($(this).val() == 'Cancel') {
       $(this).val('Edit');
+      $(this).prop('title', 'Edit');
       $(this).html("<i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span>");
       $(this).removeClass('btn-danger');
       $(this).addClass('btn-success');
@@ -59,10 +61,11 @@ $(document).ready(function() {
       $('#save-alert').show().delay(1500).fadeOut(1500, function() {
         $('#save-alert').hide();
       });
-      $('.edit-btn').val('Edit');
-      $('.edit-btn').html("<span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span>");
-      $('.edit-btn').removeClass('btn-danger');
-      $('.edit-btn').addClass('btn-success');
+      $edit_btn = $(this).parents('tr').find('.edit-btn');
+      $edit_btn.val('Edit');
+      $edit_btn.html("<span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span>");
+      $edit_btn.removeClass('btn-danger');
+      $edit_btn.addClass('btn-success');
       if($(this).prop('class') == 'proj_cd') {
         $proj_cd = $(this).prop('id');
       }

@@ -222,9 +222,9 @@
 												<div class='btn-group btn-group-xs'>";
 													if($permissions == 't') {
 														echo "
-															<button type='button' class='btn btn-success edit-btn' value='Edit'><span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span></button>
-															<button type='button' class='btn btn-success save-btn' value='Save'><i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i></button>
-															<button type='button' class='btn btn-success delete-btn' value='Delete' data-toggle='modal' data-target='#delete_confirm'><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button>
+															<button type='button' class='btn btn-success edit-btn' value='Edit' title='Edit'><span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span></button>
+															<button type='button' class='btn btn-success save-btn' value='Save' title='Save'><i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i></button>
+															<button type='button' class='btn btn-success delete-btn' value='Delete' title='Delete' data-toggle='modal' data-target='#delete_confirm'><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button>
 															";
 													} else {
 														echo "

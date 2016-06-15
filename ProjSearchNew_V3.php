@@ -145,55 +145,57 @@
 			</div>
 			-->
 		</div>
-		<div class="container-fluid search-bar">
-			<div class="row">
-				<form role="form" action="ProjSearchNew_V3.php" method="POST">
-					<div class="col-xs-2">
-						<button type="submit" class="btn btn-success center-block" name="export" id="export" value="Export Results">Export</button>
-						<input type="hidden" value="<?php echo htmlspecialchars($_POST['input']); ?>" name="hidden_input">
-					</div>
-				</form>
-				<form role="form" action="ProjSearchNew_V3.php" method="POST">
-					<div class="col-xs-8">
-						<div class="row">
-							<div class="form-group col-xs-11">
-								<input type="text" class="form-control" value="<?php echo htmlspecialchars($_POST['input']); ?>" name="input" placeholder="Search by project number or keyword">		
-							</div>
-							<div class="form group col-xs-1">
-								<button type="submit" class="btn btn-primary" name="search" id="search" value="Search">Search</button>
+		
+			<div class="container-fluid search-bar fixed">
+				<div class="row">
+					<form role="form" action="ProjSearchNew_V3.php" method="POST">
+						<div class="col-xs-2">
+							<button type="submit" class="btn btn-success center-block" name="export" id="export" value="Export Results">Export</button>
+							<input type="hidden" value="<?php echo htmlspecialchars($_POST['input']); ?>" name="hidden_input">
+						</div>
+					</form>
+					<form role="form" action="ProjSearchNew_V3.php" method="POST">
+						<div class="col-xs-8">
+							<div class="row">
+								<div class="form-group col-xs-11">
+									<input type="text" class="form-control" value="<?php echo htmlspecialchars($_POST['input']); ?>" name="input" placeholder="Search by project number or keyword">		
+								</div>
+								<div class="form group col-xs-1">
+									<button type="submit" class="btn btn-primary" name="search" id="search" value="Search">Search</button>
+								</div>
 							</div>
 						</div>
+						<div class="col-xs-2">
+							<button type="submit" class="btn btn-danger center-block" name="logout" value="Log-Out">Logout</button>
+						</div>
+					</form>
+				</div>
+				<div class="row">
+					<div class="col-xs-2">
+						<?php 
+						if($permissions == 't') {
+							echo "<button type='button' class='btn btn-success btn-xs center-block' data-toggle='modal' data-target='#new_entry'>New Entry</button>";
+						} else {
+							echo "<button type='button' class='btn btn-success btn-xs center-block disabled' data-toggle='tooltip' data-placement='bottom' title='You do not have permission'>New Entry</button>";
+						}
+						?>
+					</div>
+					<div class="col-xs-8">
+						<!--
+						<div class="radio">
+							<label class="radio-inline">Operator: </label>
+							<label class="radio-inline"><input type="radio" value="And" name="optradio" checked="">AND</label>
+							<label class="radio-inline"><input type="radio" value="Or" name="optradio">OR</label>
+						</div>
+						-->
 					</div>
 					<div class="col-xs-2">
-						<button type="submit" class="btn btn-danger center-block" name="logout" value="Log-Out">Logout</button>
+						<p>Logged in as: <strong><?php echo $name_full; ?></strong></p> 
 					</div>
-				</form>
-			</div>
-			<div class="row">
-				<div class="col-xs-2">
-					<?php 
-					if($permissions == 't') {
-						echo "<button type='button' class='btn btn-success btn-xs center-block' data-toggle='modal' data-target='#new_entry'>New Entry</button>";
-					} else {
-						echo "<button type='button' class='btn btn-success btn-xs center-block disabled' data-toggle='tooltip' data-placement='bottom' title='You do not have permission'>New Entry</button>";
-					}
-					?>
-				</div>
-				<div class="col-xs-8">
-					<!--
-					<div class="radio">
-						<label class="radio-inline">Operator: </label>
-						<label class="radio-inline"><input type="radio" value="And" name="optradio" checked="">AND</label>
-						<label class="radio-inline"><input type="radio" value="Or" name="optradio">OR</label>
-					</div>
-					-->
-				</div>
-				<div class="col-xs-2">
-					<p>Logged in as: <strong><?php echo $name_full; ?></strong></p> 
 				</div>
 			</div>
-		</div>
-		<div class="container-fluid no-padding">
+		
+		<div class="container-fluid no-padding clear">
 			<div class="row">
 				<div class="col-xs-1"></div>
 				<div class="col-xs-10 display">
@@ -224,8 +226,8 @@
 														echo "
 															<button type='button' class='btn btn-success edit-btn' value='Edit' title='Edit'><span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span></button>
 															<button type='button' class='btn btn-success save-btn' value='Save' title='Save'><i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i></button>
-															<button type='button' class='btn btn-success delete-btn' value='Delete' title='Delete' data-toggle='modal' data-target='#delete_confirm'><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button>
 															";
+															//<button type='button' class='btn btn-success delete-btn' value='Delete' title='Delete' data-toggle='modal' data-target='#delete_confirm'><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button>
 													} else {
 														echo "
 															<button type='button' class='btn btn-success edit-btn disabled' disabled='disabled' value='Edit'><span><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></span></button>

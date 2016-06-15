@@ -31,8 +31,10 @@ $(document).ready(function() {
         if($(this).prop('class') == 'xx') {
           return false;
         }
-        $(this).prop('contenteditable', true);
-        $(this).addClass('editable'); 
+        if($(this).prop('class') != 'proj_cd') {
+          $(this).prop('contenteditable', true);
+          $(this).addClass('editable');
+        }
       }); 
       return false;
     } else if($(this).val() == 'Cancel') {
@@ -87,7 +89,7 @@ $(document).ready(function() {
     return false;
   });
 
-
+/*
   $('.delete-btn').on('click', function() {
     $currentTD = $(this).parents('tr').find('td');
     $.each($currentTD, function() {
@@ -113,7 +115,7 @@ $(document).ready(function() {
       });
     });
   });
-
+*/
 
   $('#insert').on('click', function() {
     $proj_cd_form = $('#proj_cd_form').val();

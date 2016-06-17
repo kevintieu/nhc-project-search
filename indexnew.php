@@ -1,5 +1,5 @@
 <?php
-	include("LoadDb.php");
+	include 'LoadDb.php';
 	$result = pg_query("SELECT * FROM system;") or die(pg_last_error());
     $rows = pg_fetch_array($result);
 
@@ -12,14 +12,7 @@
 		} else {
 			session_start();
 			$_SESSION['login'] = "1";
-			$rows = pg_fetch_array($result);
-			$PerNm = pg_escape_string($rows['name_first']) . " " . pg_escape_string($rows['name_last']);
-			if ($rows['office'] == 1) {
-				$PerNm = $PerNm . ", Edmonton";
-			} else {
-				$PerNm = $PerNm . ", Vancouver";
-			}
-			header("Location: ProjSearchNew_V3.php?PerNm=" . $PerNm);
+			header("Location: ProjSearchNew_V3.php");
 		}
 	} else {
 		
@@ -27,7 +20,6 @@
 
     $username = $_POST['Person'];
     $_SESSION['username'] = strtoupper($username);
-
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +55,7 @@
 								<button type="submit" name='Continue' class="btn btn-primary btn-block">Login</button>
 							</form>
 						</div>
-					</div>						
+					</div>
 				</div>
 				<div class="col-sm-4"></div>
 			</div>

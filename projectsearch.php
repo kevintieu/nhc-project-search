@@ -1,11 +1,10 @@
 <?php
-	include 'LogIn_Security.php';
-	include 'LoadDb.php';
-	//include 'indexnew.php';
+	include 'login_security.php';
+	include 'loadDB.php';
 
 	function logout() {
 		session_destroy();
-		header("Location: indexnew.php");
+		header("Location: index.php");
 	}
 
 	function export($input) {
@@ -148,13 +147,13 @@
 		
 			<div class="container-fluid search-bar fixed">
 				<div class="row">
-					<form role="form" action="ProjSearchNew_V3.php" method="POST">
+					<form role="form" action="projectsearch.php" method="POST">
 						<div class="col-xs-2">
 							<button type="submit" class="btn btn-success center-block" name="export" id="export" value="Export Results">Export</button>
 							<input type="hidden" value="<?php echo htmlspecialchars($_POST['input']); ?>" name="hidden_input">
 						</div>
 					</form>
-					<form role="form" action="ProjSearchNew_V3.php" method="POST">
+					<form role="form" action="projectsearch.php" method="POST">
 						<div class="col-xs-8">
 							<div class="row">
 								<div class="form-group col-xs-11">

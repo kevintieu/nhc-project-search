@@ -1,5 +1,5 @@
 <?php
-  include 'LoadDb.php';
+  include 'loadDB.php';
 
   function sanitize($data) {
     $data = trim($data);

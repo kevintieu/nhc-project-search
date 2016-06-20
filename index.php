@@ -1,5 +1,5 @@
 <?php
-	include 'LoadDb.php';
+	include 'loadDB.php';
 	$result = pg_query("SELECT * FROM system;") or die(pg_last_error());
     $rows = pg_fetch_array($result);
 
@@ -12,7 +12,7 @@
 		} else {
 			session_start();
 			$_SESSION['login'] = "1";
-			header("Location: ProjSearchNew_V3.php");
+			header("Location: projectsearch.php");
 		}
 	} else {
 		
@@ -43,7 +43,7 @@
 					<h1 class="text-center">NHC Project Search</h1>
 					<div class="panel panel-default" id="panel">
 						<div class="panel-body">
-							<form role="form" name="LogIn" onsubmit="return checkInput();" method="POST" action="indexnew.php">
+							<form role="form" name="LogIn" onsubmit="return checkInput();" method="POST" action="index.php">
 								<div class="form-group">
 									<label for="username">Username: </label>
 									<input type="text" name="Person" value='<?php htmlspecialchars(stripslashes($Person), ENT_QUOTES); ?>' class="form-control" id="username">
